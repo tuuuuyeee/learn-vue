@@ -277,12 +277,14 @@ function checkComponents (options: Object) {
 }
 
 export function validateComponentName (name: string) {
+  // 组件的名字由普通的字符和中横线(-)组成，且必须以字母开头
   if (!new RegExp(`^[a-zA-Z][\\-\\.0-9_${unicodeRegExp.source}]*$`).test(name)) {
     warn(
       'Invalid component name: "' + name + '". Component names ' +
       'should conform to valid custom element name in html5 specification.'
     )
   }
+  // 组件名字：是否为内置的标签之外 || 检测是否是保留标签
   if (isBuiltInTag(name) || config.isReservedTag(name)) {
     warn(
       'Do not use built-in or reserved HTML elements as component ' +
@@ -398,6 +400,7 @@ export function mergeOptions (
     child = child.options
   }
 
+  // 规范 props
   normalizeProps(child, vm)
   normalizeInject(child, vm)
   normalizeDirectives(child)

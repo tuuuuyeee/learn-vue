@@ -59,6 +59,11 @@ export default ({
 
   /**
    * Whether to record perf
+   * 是否需要性能追踪，追踪如下 4 个场景
+   * 1、组件初始化(component init)
+   * 2、编译(compile)，将模板(template)编译成渲染函数
+   * 3、渲染(render)，其实就是渲染函数的性能，或者说渲染函数执行且生成虚拟DOM(vnode)的性能
+   * 4、打补丁(patch)，将虚拟DOM渲染为真实DOM的性能
    */
   performance: false,
 

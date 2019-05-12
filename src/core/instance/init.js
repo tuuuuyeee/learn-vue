@@ -20,6 +20,7 @@ export function initMixin (Vue: Class<Component>) {
 
     let startTag, endTag
     /* istanbul ignore if */
+    // 非生产环境 && 需要性能追踪 && 存在 mark 方法
     if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
       startTag = `vue-perf-start:${vm._uid}`
       endTag = `vue-perf-end:${vm._uid}`
@@ -27,6 +28,8 @@ export function initMixin (Vue: Class<Component>) {
     }
 
     // a flag to avoid this being observed
+    // 用来标识一个对象是 Vue 实例。
+    // 即如果发现一个对象拥有 _isVue 属性并且其值为 true，那么就代表该对象是 Vue 实例。这样可以避免该对象被响应系统观测
     vm._isVue = true
     // merge options
     if (options && options._isComponent) {
@@ -90,6 +93,7 @@ export function initInternalComponent (vm: Component, options: InternalComponent
   }
 }
 
+// 解析构造者的 options，把本身的options和父类的options合起来
 export function resolveConstructorOptions (Ctor: Class<Component>) {
   let options = Ctor.options
   if (Ctor.super) {
