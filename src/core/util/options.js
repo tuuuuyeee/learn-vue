@@ -296,6 +296,7 @@ export function validateComponentName (name: string) {
 /**
  * Ensure all props option syntax are normalized into the
  * Object-based format.
+ * 确保所有 props 属性格式统一
  */
 function normalizeProps (options: Object, vm: ?Component) {
   const props = options.props
@@ -306,6 +307,7 @@ function normalizeProps (options: Object, vm: ?Component) {
     i = props.length
     while (i--) {
       val = props[i]
+      // props 数组中的元素确确实实必须是字符串
       if (typeof val === 'string') {
         name = camelize(val)
         res[name] = { type: null }
@@ -364,6 +366,7 @@ function normalizeInject (options: Object, vm: ?Component) {
 function normalizeDirectives (options: Object) {
   const dirs = options.directives
   if (dirs) {
+    // 当发现你注册的指令是一个函数的时候，则将该函数作为对象形式的 bind 属性和 update 属性的值？
     for (const key in dirs) {
       const def = dirs[key]
       if (typeof def === 'function') {
